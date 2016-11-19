@@ -2,5 +2,6 @@
 /logs/
 /project/*-shim.sbt
 /project/project/
-/project/target/
-/target/
+target
+.idea
+project/plugins.sbt
