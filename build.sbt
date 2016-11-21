@@ -5,16 +5,16 @@ crossScalaVersions := Seq("2.10.6", "2.11.8")
 // Avoid publish default project
 publishArtifact := false
 
-// Why Bintray is working in a not publish artifact? BUG?
+// Why Bintray is working in a not publish artifact? BUG? https://github.com/softprops/bintray-sbt/issues/93
 // Workaround 1:
 //licenses += ("MIT", url("http://opensource.org/licenses/MIT")) // bintrayEnsureLicenses / Removing this, error even with publishArtifact := false
 //bintrayReleaseOnPublish := false // If not, try to release a non published artifact
 //bintrayPackage := "testing-multimodule" // If not present, create an empty package with the name of the project.
 //version := "0.1.0" // If it is not present, bintray pluging fail because the default version is SNAPSHOT
 // Workaround 2:
-//bintrayRelease := false
-//bintrayEnsureBintrayPackageExists := false
-//bintrayEnsureLicenses := false
+bintrayRelease := false
+bintrayEnsureBintrayPackageExists := false
+bintrayEnsureLicenses := false
 
 lazy val commonSettings = Seq(
   organization := "com.acervera",
