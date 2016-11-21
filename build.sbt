@@ -22,7 +22,7 @@ releaseProcess := Seq[ReleaseStep](
 // Avoid publish default project
 publishArtifact := false
 
-// Why Bintray is working in a not publish artifact? BUG?
+// Why Bintray is working in a not publish artifact? BUG? https://github.com/softprops/bintray-sbt/issues/93
 // Workaround 1:
 //licenses += ("MIT", url("http://opensource.org/licenses/MIT")) // bintrayEnsureLicenses / Removing this, error even with publishArtifact := false
 //bintrayReleaseOnPublish := false // If not, try to release a non published artifact
