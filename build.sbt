@@ -41,7 +41,7 @@ lazy val commonSettings = Seq(
   publishMavenStyle := true,
 
   // http://www.scala-sbt.org/0.12.2/docs/Detailed-Topics/Artifacts.html
-  publishArtifact in Test := true,
+  publishArtifact in Test := false,
 
   // Bintray
   bintrayRepository := "maven",
