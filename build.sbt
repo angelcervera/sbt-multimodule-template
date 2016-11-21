@@ -1,6 +1,23 @@
 import sbt.Keys._
+import sbtrelease.ReleaseStateTransformations._
 
 crossScalaVersions := Seq("2.10.6", "2.11.8")
+
+// Release
+releaseCrossBuild := true
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  commitReleaseVersion,
+  tagRelease,
+  publishArtifacts,
+  setNextVersion,
+  commitNextVersion,
+  pushChanges
+)
 
 // Avoid publish default project
 publishArtifact := false
@@ -18,7 +35,6 @@ bintrayEnsureLicenses := false
 
 lazy val commonSettings = Seq(
   organization := "com.acervera",
-  version := "0.1.0",
   scalaVersion := "2.11.8",
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   publishArtifact := true, // Enable publish
