@@ -29,9 +29,9 @@ publishArtifact := false
 //bintrayPackage := "testing-multimodule" // If not present, create an empty package with the name of the project.
 //version := "0.1.0" // If it is not present, bintray pluging fail because the default version is SNAPSHOT
 // Workaround 2:
-//bintrayRelease := false
-//bintrayEnsureBintrayPackageExists := false
-//bintrayEnsureLicenses := false
+bintrayRelease := false
+bintrayEnsureBintrayPackageExists := false
+bintrayEnsureLicenses := false
 
 lazy val commonSettings = Seq(
   organization := "com.acervera",
