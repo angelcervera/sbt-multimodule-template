@@ -4,6 +4,7 @@ import sbtrelease.ReleaseStateTransformations._
 crossScalaVersions := Seq("2.10.6", "2.11.8")
 
 // Release
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
 releaseCrossBuild := true
 releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
