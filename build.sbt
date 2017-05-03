@@ -50,16 +50,16 @@ lazy val commonSettings = Seq(
   bintrayRelease := false
 )
 
-lazy val core = (project in file("core")).
+val core = (project in file("core")).
   settings(commonSettings: _*)
 
-lazy val module1 = (project in file("module1")).
+val module1 = (project in file("module1")).
   settings(commonSettings: _*)
 
-lazy val module2 = (project in file("module2")).
+val module2 = (project in file("module2")).
   settings(commonSettings: _*)
 
-lazy val moduleIgnored = (project in file("moduleignored")).
+val moduleIgnored = (project in file("moduleignored")).
   settings(commonSettings: _*).
   settings(
     Seq(
