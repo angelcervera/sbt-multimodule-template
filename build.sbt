@@ -64,7 +64,7 @@ lazy val enablingPublishingSettings = Seq(
 
 import ReleaseTransformations._
 lazy val root = (project in file("."))
-  .aggregate(core, module1, module2, moduleIgnored)
+  .aggregate(core, module1, /*module2,*/ moduleIgnored)
   .settings(
     // crossScalaVersions must be set to Nil on the aggregating project
     crossScalaVersions := Nil,
@@ -101,17 +101,17 @@ lazy val module1 = (project in file("module1"))
     enablingPublishingSettings,
     name := "submodule1",
     description := "Submodule 1 published",
-    bintrayPackage := "Multimodule 1",
+    bintrayPackage := "multimodule-1",
   )
 
-lazy val module2 = (project in file("module2"))
-  .settings(
-    commonSettings,
-    enablingPublishingSettings,
-    name := "submodule2",
-    description := "Submodule 2 published",
-    bintrayPackage := "Multimodule 2",
-  )
+//lazy val module2 = (project in file("module2"))
+//  .settings(
+//    commonSettings,
+//    enablingPublishingSettings,
+//    name := "submodule2",
+//    description := "Submodule 2 published",
+//    bintrayPackage := "multimodule-2",
+//  )
 
 lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
