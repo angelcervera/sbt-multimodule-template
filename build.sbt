@@ -56,7 +56,7 @@ lazy val enablingPublishingSettings = Seq(
   // Bintray
   bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
-  bintrayPackage := "testing-multimodule",
+//  bintrayPackage := "testing-multimodule",
 //  bintrayReleaseOnPublish := false,
 //  bintrayRelease := false
 )
