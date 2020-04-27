@@ -2,6 +2,8 @@
 
 Multi-module projects template using sbt.
 
+More details at: https://www.acervera.com/blog/2020/04/sbt-crossversion-release-bintray/
+
 ## Features
 
 ### Crossversion
