@@ -46,7 +46,8 @@ lazy val commonSettings = Seq(
   licenses in ThisBuild += ("MIT", url("http://opensource.org/licenses/MIT"))
 )
 
-lazy val disablingPublishingSettings = Seq(skip in publish := true, publishArtifact := false)
+lazy val disablingPublishingSettings =
+  Seq(skip in publish := true, publishArtifact := false)
 
 lazy val enablingPublishingSettings = Seq(
   publishArtifact := true, // Enable publish
@@ -56,11 +57,10 @@ lazy val enablingPublishingSettings = Seq(
   // Bintray
   bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
-//  bintrayPackage := "testing-multimodule",
+  bintrayVcsUrl := Some("https://github.com/angelcervera/sbt-multimodule-template"),
 //  bintrayReleaseOnPublish := false,
 //  bintrayRelease := false
 )
-
 
 import ReleaseTransformations._
 lazy val root = (project in file("."))
@@ -69,7 +69,6 @@ lazy val root = (project in file("."))
     // crossScalaVersions must be set to Nil on the aggregating project
     crossScalaVersions := Nil,
     publish / skip := true,
-
     // don't use sbt-release's cross facility
     releaseCrossBuild := false,
     releaseProcess := Seq[ReleaseStep](
@@ -92,7 +91,8 @@ lazy val core = (project in file("core"))
     commonSettings,
     enablingPublishingSettings,
     name := "core",
-    description := "Main project."
+    description := "Main project.",
+    bintrayPackage := "Multimodule core",
   )
 
 lazy val module1 = (project in file("module1"))
@@ -100,7 +100,8 @@ lazy val module1 = (project in file("module1"))
     commonSettings,
     enablingPublishingSettings,
     name := "submodule1",
-    description := "Submodule 1 published"
+    description := "Submodule 1 published",
+    bintrayPackage := "Multimodule 1",
   )
 
 lazy val module2 = (project in file("module2"))
@@ -108,7 +109,8 @@ lazy val module2 = (project in file("module2"))
     commonSettings,
     enablingPublishingSettings,
     name := "submodule2",
-    description := "Submodule 2 published"
+    description := "Submodule 2 published",
+    bintrayPackage := "Multimodule 2",
   )
 
 lazy val moduleIgnored = (project in file("moduleignored"))
