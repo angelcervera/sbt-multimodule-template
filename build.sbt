@@ -56,8 +56,8 @@ lazy val enablingPublishingSettings = Seq(
   bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
   bintrayPackage := "testing-multimodule",
-  bintrayReleaseOnPublish := false,
-  bintrayRelease := false
+//  bintrayReleaseOnPublish := false,
+//  bintrayRelease := false
 )
 
 lazy val core = (project in file("core"))
