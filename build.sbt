@@ -77,7 +77,7 @@ lazy val module1 = (project in file("module1"))
     enablingPublishingSettings,
     name := "submodule1",
     description := "Submodule 1 published",
-    bintrayPackage := "multimodule-submodule-2",
+    bintrayPackage := "multimodule-submodule-1",
   )
 
 lazy val module2 = (project in file("module2"))
