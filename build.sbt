@@ -45,7 +45,7 @@ lazy val commonSettings = Seq(
   licenses in ThisBuild += ("MIT", url("http://opensource.org/licenses/MIT"))
 )
 
-lazy val disablingPublishingSettings = Seq(skip in publish := true)
+lazy val disablingPublishingSettings = Seq(skip in publish := true, publishArtifact := false)
 
 lazy val enablingPublishingSettings = Seq(
   publishArtifact := true, // Enable publish
