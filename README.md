@@ -6,7 +6,7 @@ Multi-module projects template using sbt.
 
 ### Crossversion
 Generate code for different Scala versions.
-This feature is enabled automatically for the other plugins, like release or publish
+This feature is enabled automatically for plugins as well, like release or publish
 
 ### Bintray publishing process
 Publishing process to Bintray using [ sbt/sbt-bintray ](https://github.com/sbt/sbt-bintray) plugin.
@@ -16,11 +16,15 @@ If you prefer to execute it manually, remove ```publishArtifacts``` from the lis
 ```
 $ sbt publish
 ```
-I applied several workarounds for multimodule projects.
 
-You can ignore artifact publication with ```publishArtifact := false```
+You can ignore artifact publication with
+```
+skip in publish := true
+publishArtifact := false
+```
 
-Credentials in :
+Bintray credentials are stored in `~/.bintray/.credentials` but [other ways are allowed](https://github.com/sbt/sbt-bintray#credentials):
+
 ```properties
 realm = Bintray API Realm
 host = api.bintray.com
