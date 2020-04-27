@@ -1,6 +1,5 @@
 import sbt.Keys._
 import sbt.ScmInfo
-import sbtrelease.ReleaseStateTransformations._
 
 lazy val scala213 = "2.13.2"
 lazy val scala212 = "2.12.11"
@@ -9,9 +8,6 @@ lazy val scala210 = "2.10.7"
 lazy val supportedScalaVersions = List(scala213, scala212, scala211, scala210)
 
 crossScalaVersions := supportedScalaVersions
-
-// Avoid publish default project
-//publishArtifact := false
 
 lazy val commonSettings = Seq(
   organization := "com.acervera.multimodule",
@@ -34,7 +30,7 @@ lazy val enablingPublishingSettings = Seq(
   bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
   bintrayVcsUrl := Some("https://github.com/angelcervera/sbt-multimodule-template.git"),
-//  bintrayReleaseOnPublish := false,
+//  bintrayReleaseOnPublish := false, To enable staging
 //  bintrayRelease := false
 )
 
