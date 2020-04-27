@@ -19,7 +19,7 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  releaseStepCommandAndRemaining("+publishSigned"), //     releaseStepCommandAndRemaining("+publishArtifacts"),
+  releaseStepCommandAndRemaining("+publishArtifact"),
   setNextVersion,
   commitNextVersion,
   pushChanges
