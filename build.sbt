@@ -1,7 +1,13 @@
 import sbt.Keys._
 import sbtrelease.ReleaseStateTransformations._
 
-crossScalaVersions := Seq("2.10.6", "2.11.8")
+lazy val scala213 = "2.13.2"
+lazy val scala212 = "2.12.11"
+lazy val scala211 = "2.11.12"
+lazy val scala210 = "2.10.7"
+lazy val supportedScalaVersions = List(scala213, scala212, scala211, scala210)
+
+crossScalaVersions := supportedScalaVersions
 
 // Release
 releaseCrossBuild := true
@@ -39,10 +45,8 @@ lazy val commonSettings = Seq(
   licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
   publishArtifact := true, // Enable publish
   publishMavenStyle := true,
-
   // http://www.scala-sbt.org/0.12.2/docs/Detailed-Topics/Artifacts.html
   publishArtifact in Test := false,
-
   // Bintray
   bintrayRepository := "maven",
   bintrayPackage := "testing-multimodule",
@@ -50,18 +54,15 @@ lazy val commonSettings = Seq(
   bintrayRelease := false
 )
 
-lazy val core = (project in file("core")).
-  settings(commonSettings: _*)
+lazy val core = (project in file("core")).settings(commonSettings: _*)
 
-lazy val module1 = (project in file("module1")).
-  settings(commonSettings: _*)
+lazy val module1 = (project in file("module1")).settings(commonSettings: _*)
 
-lazy val module2 = (project in file("module2")).
-  settings(commonSettings: _*)
+lazy val module2 = (project in file("module2")).settings(commonSettings: _*)
 
-lazy val moduleIgnored = (project in file("moduleignored")).
-  settings(commonSettings: _*).
-  settings(
+lazy val moduleIgnored = (project in file("moduleignored"))
+  .settings(commonSettings: _*)
+  .settings(
     Seq(
       publishArtifact := false // Disable publish
     )
