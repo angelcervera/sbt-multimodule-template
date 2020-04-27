@@ -60,14 +60,17 @@ lazy val enablingPublishingSettings = Seq(
   bintrayRelease := false
 )
 
-lazy val core = (project in file("core")).settings(commonSettings: _*)
+lazy val core = (project in file("core"))
+  .settings(commonSettings, enablingPublishingSettings)
 
-lazy val module1 = (project in file("module1")).settings(commonSettings: _*)
+lazy val module1 = (project in file("module1"))
+  .settings(commonSettings)
 
-lazy val module2 = (project in file("module2")).settings(commonSettings: _*)
+lazy val module2 = (project in file("module2"))
+  .settings(commonSettings)
 
 lazy val moduleIgnored = (project in file("moduleignored"))
-  .settings(commonSettings: _*)
+  .settings(commonSettings, disablingPublishingSettings)
   .settings(
     Seq(
       publishArtifact := false // Disable publish
