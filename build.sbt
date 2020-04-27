@@ -15,11 +15,11 @@ releaseProcess := Seq[ReleaseStep](
   checkSnapshotDependencies,
   inquireVersions,
   runClean,
-  runTest,
+  releaseStepCommandAndRemaining("+test"),
   setReleaseVersion,
   commitReleaseVersion,
   tagRelease,
-  publishArtifacts,
+  releaseStepCommandAndRemaining("+publishArtifacts"), //     releaseStepCommandAndRemaining("+publishSigned"),
   setNextVersion,
   commitNextVersion,
   pushChanges
@@ -35,19 +35,25 @@ publishArtifact := false
 //bintrayPackage := "testing-multimodule" // If not present, create an empty package with the name of the project.
 //version := "0.1.0" // If it is not present, bintray pluging fail because the default version is SNAPSHOT
 // Workaround 2:
-bintrayRelease := false
-bintrayEnsureBintrayPackageExists := false
-bintrayEnsureLicenses := false
+//bintrayRelease := false
+//bintrayEnsureBintrayPackageExists := false
+//bintrayEnsureLicenses := false
 
 lazy val commonSettings = Seq(
   organization := "com.acervera",
-  scalaVersion := "2.11.8",
-  licenses += ("MIT", url("http://opensource.org/licenses/MIT")),
+  crossScalaVersions := supportedScalaVersions,
+  licenses in ThisBuild += ("MIT", url("http://opensource.org/licenses/MIT"))
+)
+
+lazy val disablingPublishingSettings = Seq(skip in publish := true)
+
+lazy val enablingPublishingSettings = Seq(
   publishArtifact := true, // Enable publish
   publishMavenStyle := true,
   // http://www.scala-sbt.org/0.12.2/docs/Detailed-Topics/Artifacts.html
   publishArtifact in Test := false,
   // Bintray
+  bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
   bintrayPackage := "testing-multimodule",
   bintrayReleaseOnPublish := false,
