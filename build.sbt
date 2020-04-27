@@ -38,6 +38,7 @@ import ReleaseTransformations._
 lazy val root = (project in file("."))
   .aggregate(core, module1, module2, moduleIgnored)
   .settings(
+    name := "sbt-multimodule-template",
     // crossScalaVersions must be set to Nil on the aggregating project
     crossScalaVersions := Nil,
     publish / skip := true,
