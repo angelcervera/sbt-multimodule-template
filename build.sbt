@@ -10,20 +10,20 @@ lazy val supportedScalaVersions = List(scala213, scala212, scala211, scala210)
 crossScalaVersions := supportedScalaVersions
 
 // Release
-releaseCrossBuild := true
-releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,
-  inquireVersions,
-  runClean,
-  releaseStepCommandAndRemaining("+test"),
-  setReleaseVersion,
-  commitReleaseVersion,
-  tagRelease,
-  releaseStepCommandAndRemaining("+publishArtifact"),
-  setNextVersion,
-  commitNextVersion,
-  pushChanges
-)
+//releaseCrossBuild := true
+//releaseProcess := Seq[ReleaseStep](
+//  checkSnapshotDependencies,
+//  inquireVersions,
+//  runClean,
+//  releaseStepCommandAndRemaining("+test"),
+//  setReleaseVersion,
+//  commitReleaseVersion,
+//  tagRelease,
+//  releaseStepCommandAndRemaining("+publishArtifact"),
+//  setNextVersion,
+//  commitNextVersion,
+//  pushChanges
+//)
 
 // Avoid publish default project
 publishArtifact := false
@@ -60,6 +60,32 @@ lazy val enablingPublishingSettings = Seq(
 //  bintrayRelease := false
 )
 
+
+import ReleaseTransformations._
+lazy val root = (project in file("."))
+  .aggregate(core, module1, module2, moduleIgnored)
+  .settings(
+    // crossScalaVersions must be set to Nil on the aggregating project
+    crossScalaVersions := Nil,
+    publish / skip := true,
+
+    // don't use sbt-release's cross facility
+    releaseCrossBuild := false,
+    releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runClean,
+      releaseStepCommandAndRemaining("+test"),
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      releaseStepCommandAndRemaining("+publishSigned"),
+      setNextVersion,
+      commitNextVersion,
+      pushChanges
+    )
+  )
+
 lazy val core = (project in file("core"))
   .settings(commonSettings, enablingPublishingSettings)
 
@@ -71,8 +97,3 @@ lazy val module2 = (project in file("module2"))
 
 lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
-  .settings(
-    Seq(
-      publishArtifact := false // Disable publish
-    )
-  )
