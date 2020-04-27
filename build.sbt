@@ -40,7 +40,8 @@ publishArtifact := false
 //bintrayEnsureLicenses := false
 
 lazy val commonSettings = Seq(
-  organization := "com.acervera",
+  organization := "com.acervera.multimodule",
+  organizationHomepage := Some(url("http://www.acervera.com")),
   crossScalaVersions := supportedScalaVersions,
   licenses in ThisBuild += ("MIT", url("http://opensource.org/licenses/MIT"))
 )
@@ -87,13 +88,28 @@ lazy val root = (project in file("."))
   )
 
 lazy val core = (project in file("core"))
-  .settings(commonSettings, enablingPublishingSettings)
+  .settings(
+    commonSettings,
+    enablingPublishingSettings,
+    name := "core",
+    description := "Main project."
+  )
 
 lazy val module1 = (project in file("module1"))
-  .settings(commonSettings)
+  .settings(
+    commonSettings,
+    enablingPublishingSettings,
+    name := "submodule1",
+    description := "Submodule 1 published"
+  )
 
 lazy val module2 = (project in file("module2"))
-  .settings(commonSettings)
+  .settings(
+    commonSettings,
+    enablingPublishingSettings,
+    name := "submodule2",
+    description := "Submodule 2 published"
+  )
 
 lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
