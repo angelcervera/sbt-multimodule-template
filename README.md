@@ -20,9 +20,18 @@ I applied several workarounds for multimodule projects.
 
 You can ignore artifact publication with ```publishArtifact := false```
 
+Credentials in :
+```properties
+realm = Bintray API Realm
+host = api.bintray.com
+user = <insert-your-username-here>
+password = <insert-your-key-here>
+```
+
 ### Release process
 Release process using [sbt-release](https://github.com/sbt/sbt-release) plugin
 ```
 $ sbt release
 ```
+
 
