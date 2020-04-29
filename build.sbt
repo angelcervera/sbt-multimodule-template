@@ -7,8 +7,6 @@ lazy val scala211 = "2.11.12"
 lazy val scala210 = "2.10.7"
 lazy val supportedScalaVersions = List(scala213, scala212, scala211, scala210)
 
-crossScalaVersions := supportedScalaVersions
-
 lazy val commonSettings = Seq(
   organization := "com.acervera.multimodule",
   organizationHomepage := Some(url("http://www.acervera.com")),
