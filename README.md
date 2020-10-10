@@ -54,7 +54,9 @@ Coverage has been enabled per module programmatically in the build.sbt file.
 sbt clean "++2.13.3 test" coverageAggregate
 ```
 #### Notes:
-At the moment, `sbt-scoverage` does not working properly with cross-compile, so report aggregation is working only with
+[sbt-scoverage BUG #315](https://github.com/scoverage/sbt-scoverage/issues/315)
+
+At the moment, `sbt-scoverage` does not working properly with cross-building, so report aggregation is working only with
 the main version. This code, will not aggregate report coverages for 2.13.3:
 ```
 $ sbt clean "++2.13.3 test"
@@ -66,9 +68,9 @@ $ sbt coverageAggregate
 
 Not working even with 2.12.12:
 ```
-$ sbt clean "++2.13.3 test"
+$ sbt clean "++2.12.12 test"
 $ # Next is not working
-$ sbt "++2.13.3 coverageAggregate"
+$ sbt "++2.12.2 coverageAggregate"
 $ # In this case, next works
 $ sbt coverageAggregate
 ```
