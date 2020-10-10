@@ -1,8 +1,8 @@
 import sbt.Keys._
 import sbt.ScmInfo
 
-lazy val scala213 = "2.13.2"
-lazy val scala212 = "2.12.11"
+lazy val scala213 = "2.13.3"
+lazy val scala212 = "2.12.12"
 lazy val scala211 = "2.11.12"
 lazy val scala210 = "2.10.7"
 lazy val supportedScalaVersions = List(scala213, scala212, scala211, scala210)
@@ -14,6 +14,9 @@ lazy val commonSettings = Seq(
   licenses in ThisBuild += ("MIT", url("http://opensource.org/licenses/MIT")),
   homepage in ThisBuild := Some(url(s"https://github.com/angelcervera/sbt-multimodule-template")),
   scmInfo in ThisBuild := Some(ScmInfo(url("https://github.com/angelcervera/sbt-multimodule-template"), "git@github.com:angelcervera/sbt-multimodule-template.git")),
+  libraryDependencies ++= Seq(
+    "org.scalatest" %% "scalatest" % "3.2.0" % "test"
+  )
 )
 
 lazy val disablingPublishingSettings =
@@ -28,13 +31,16 @@ lazy val enablingPublishingSettings = Seq(
   bintrayPackageLabels := Seq("scala", "sbt"),
   bintrayRepository := "maven",
   bintrayVcsUrl := Some("https://github.com/angelcervera/sbt-multimodule-template.git"),
-//  bintrayReleaseOnPublish := false, To enable staging
-//  bintrayRelease := false
+  //  bintrayReleaseOnPublish := false, To enable staging
+  //  bintrayRelease := false
 )
 
-import ReleaseTransformations._
+lazy val enablingCoverageSettings = Seq(coverageEnabled := true)
+
+import sbtrelease.ReleasePlugin.autoImport.ReleaseTransformations._
+
 lazy val root = (project in file("."))
-  .aggregate(core, module1, module2, moduleIgnored)
+  .aggregate(core, module1, module2, moduleIgnored, moduleOnly212)
   .settings(
     name := "sbt-multimodule-template",
     // crossScalaVersions must be set to Nil on the aggregating project
@@ -61,6 +67,7 @@ lazy val core = (project in file("core"))
   .settings(
     commonSettings,
     enablingPublishingSettings,
+    enablingCoverageSettings,
     name := "core",
     description := "Main project.",
     bintrayPackage := "multimodule-core", // Package name that the Bintray Dashboard will show.
@@ -70,6 +77,7 @@ lazy val module1 = (project in file("module1"))
   .settings(
     commonSettings,
     enablingPublishingSettings,
+    enablingCoverageSettings,
     name := "submodule1",
     description := "Submodule 1 published",
     bintrayPackage := "multimodule-submodule-1",
@@ -79,6 +87,7 @@ lazy val module2 = (project in file("module2"))
   .settings(
     commonSettings,
     enablingPublishingSettings,
+    enablingCoverageSettings,
     name := "submodule2",
     description := "Submodule 2 published",
     bintrayPackage := "multimodule-submodule-2",
@@ -86,3 +95,7 @@ lazy val module2 = (project in file("module2"))
 
 lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
+
+lazy val moduleOnly212 = (project in file("moduleOnly212"))
+  .settings(commonSettings, crossScalaVersions := Seq(scala212), enablingCoverageSettings)
+  .dependsOn(core)

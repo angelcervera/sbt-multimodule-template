@@ -1,4 +1,4 @@
-package com.example
+package com.example.moduleignored
 
 object Hello {
   def main(args: Array[String]): Unit = {
