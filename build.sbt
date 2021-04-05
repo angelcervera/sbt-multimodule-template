@@ -95,5 +95,10 @@ lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
 
 lazy val moduleOnly212 = (project in file("moduleOnly212"))
-  .settings(commonSettings, crossScalaVersions := Seq(scala212), enablingCoverageSettings)
+  .settings(
+    commonSettings,
+    crossScalaVersions := Seq(scala212),
+    enablingPublishingSettings,
+    enablingCoverageSettings
+  )
   .dependsOn(core)
