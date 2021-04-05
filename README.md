@@ -10,6 +10,9 @@ More details at: https://www.acervera.com/blog/2020/04/sbt-crossversion-release-
 Generate code for different Scala versions.
 This feature is enabled automatically for plugins as well, like release or publish
 
+### JFrog.
+- from 
+
 ### Bintray publishing process
 Publishing process to Bintray using [sbt/sbt-bintray](https://github.com/sbt/sbt-bintray) plugin.
 This step has been integrate as part of the release process, so manual launch is not necessary.

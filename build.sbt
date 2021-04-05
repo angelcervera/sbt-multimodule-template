@@ -20,14 +20,21 @@ lazy val commonSettings = Seq(
 )
 
 lazy val disablingPublishingSettings =
-  Seq(skip in publish := true, publishArtifact := false)
+  Seq(publish / skip := true, publishArtifact := false)
 
 lazy val enablingPublishingSettings = Seq(
   publishArtifact := true, // Enable publish
 //  publishMavenStyle := true,
   // http://www.scala-sbt.org/0.12.2/docs/Detailed-Topics/Artifacts.html
   publishArtifact in Test := false,
-
+  credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+  publishTo := {
+    val nexus = "http://simplexportal.jfrog.io/artifactory/"
+    if (isSnapshot.value)
+      Some("simplexspatial-snapshots" at nexus)
+    else
+      Some("simplexspatial"  at nexus)
+  }
 )
 
 lazy val enablingCoverageSettings = Seq(coverageEnabled := true)
