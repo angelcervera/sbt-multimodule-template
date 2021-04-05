@@ -56,7 +56,7 @@ sbt clean "++2.13.3 test" coverageAggregate
 #### Notes:
 [sbt-scoverage BUG #315](https://github.com/scoverage/sbt-scoverage/issues/315)
 
-At the moment, `sbt-scoverage` does not working properly with cross-building, so report aggregation is working only with
+At the moment, `sbt-scoverage` does not work properly with cross-building, so report aggregation is working only with
 the main version. This code, will not aggregate report coverages for 2.13.3:
 ```
 $ sbt clean "++2.13.3 test"
