@@ -20,19 +20,20 @@ lazy val commonSettings = Seq(
 )
 
 lazy val disablingPublishingSettings =
-  Seq(skip in publish := true, publishArtifact := false)
+  Seq(publish / skip := true, publishArtifact := false)
 
 lazy val enablingPublishingSettings = Seq(
   publishArtifact := true, // Enable publish
-  publishMavenStyle := true,
+//  publishMavenStyle := true,
   // http://www.scala-sbt.org/0.12.2/docs/Detailed-Topics/Artifacts.html
   publishArtifact in Test := false,
-  // Bintray
-  bintrayPackageLabels := Seq("scala", "sbt"),
-  bintrayRepository := "maven",
-  bintrayVcsUrl := Some("https://github.com/angelcervera/sbt-multimodule-template.git"),
-  //  bintrayReleaseOnPublish := false, To enable staging
-  //  bintrayRelease := false
+  credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+  publishTo := {
+    if (isSnapshot.value)
+      Some("Artifactory Realm" at "https://simplexportal.jfrog.io/artifactory/simplexspatial-snapshots")
+    else
+      Some("Artifactory Realm" at "https://simplexportal.jfrog.io/artifactory/simplexspatial")
+  }
 )
 
 lazy val enablingCoverageSettings = Seq(coverageEnabled := true)
@@ -70,7 +71,6 @@ lazy val core = (project in file("core"))
     enablingCoverageSettings,
     name := "core",
     description := "Main project.",
-    bintrayPackage := "multimodule-core", // Package name that the Bintray Dashboard will show.
   )
 
 lazy val module1 = (project in file("module1"))
@@ -80,7 +80,6 @@ lazy val module1 = (project in file("module1"))
     enablingCoverageSettings,
     name := "submodule1",
     description := "Submodule 1 published",
-    bintrayPackage := "multimodule-submodule-1",
   )
 
 lazy val module2 = (project in file("module2"))
@@ -90,12 +89,16 @@ lazy val module2 = (project in file("module2"))
     enablingCoverageSettings,
     name := "submodule2",
     description := "Submodule 2 published",
-    bintrayPackage := "multimodule-submodule-2",
   )
 
 lazy val moduleIgnored = (project in file("moduleignored"))
   .settings(commonSettings, disablingPublishingSettings)
 
 lazy val moduleOnly212 = (project in file("moduleOnly212"))
-  .settings(commonSettings, crossScalaVersions := Seq(scala212), enablingCoverageSettings)
+  .settings(
+    commonSettings,
+    crossScalaVersions := Seq(scala212),
+    enablingPublishingSettings,
+    enablingCoverageSettings
+  )
   .dependsOn(core)
