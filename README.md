@@ -13,8 +13,8 @@ This feature is enabled automatically for plugins as well, like release or publi
 ### JFrog.
 
 The first step it to create two repositories:
-1. A local repository for Snapshots repository, in our example, called *simplexspatial-snapshots*.
-2. A release repository, in our case called *simplexspatial*. This repository is going to point to our maven central repository.
+1. A local repository for Snapshots, in our example, called *simplexspatial-snapshots*.
+2. A local repository for releases, in our case called *simplexspatial*.
 
 This step has been integrated as part of the release process, so manual launch is not necessary.
 
