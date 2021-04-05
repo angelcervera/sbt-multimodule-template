@@ -29,7 +29,7 @@ lazy val enablingPublishingSettings = Seq(
   publishArtifact in Test := false,
   credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
   publishTo := {
-    val nexus = "http://simplexportal.jfrog.io/artifactory/"
+    val nexus = "https://simplexportal.jfrog.io/artifactory/"
     if (isSnapshot.value)
       Some("simplexspatial-snapshots" at nexus)
     else
