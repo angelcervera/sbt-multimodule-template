@@ -31,9 +31,9 @@ lazy val enablingPublishingSettings = Seq(
   publishTo := {
     val nexus = "https://simplexportal.jfrog.io/artifactory/"
     if (isSnapshot.value)
-      Some("simplexspatial-snapshots" at nexus)
+      Some("snapshots" at nexus + "simplexspatial-snapshots")
     else
-      Some("simplexspatial"  at nexus)
+      Some("releases"  at nexus + "simplexspatial")
   }
 )
 
